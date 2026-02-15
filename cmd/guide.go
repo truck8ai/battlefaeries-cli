@@ -61,16 +61,27 @@ var guideCmd = &cobra.Command{
 		// Stats
 		cyan.Println("  Stat Formulas")
 		fmt.Println("    Attack  = strength + floor(magic * 0.5) + equipment")
-		fmt.Println("    Defense = floor(str * 0.5) + floor(agi * 0.5) + equipment")
+		fmt.Println("    Defense = floor(str * 0.7) + floor(agi * 0.7) + equipment")
 		fmt.Println("    Speed   = agility + equipment")
 		fmt.Println("    Crit    = 3 + floor(magic / 5) + equipment  (percentage)")
 		fmt.Println("    HP      = hp + equipment  (1 allocated point = +10 HP)")
 		fmt.Println("    Skill Power = baseValue * (1 + magic * 0.015)")
+		fmt.Println("    Base stats: HP 200 | STR 5 | AGI 5 | MAG 4")
 		fmt.Printf("    Stat points per level: %d\n\n", 3)
+
+		// Leveling
+		cyan.Println("  Leveling")
+		fmt.Println("    XP to next level = 50 × level + 50  (1→2: 100, 5→6: 300, 10→11: 550)")
+		fmt.Println("    XP per faerie: 1 XP per round survived + share of team bonus")
+		fmt.Println("    Win bonus: kills × 50 ÷ team size  (kills = 5 - enemy survivors)")
+		fmt.Println("    Loss bonus: 10 ÷ team size  |  Draw bonus: 20 ÷ team size")
+		fmt.Println("    Level up: +3 stat points to allocate")
+		fmt.Println("    Stat reset: bf stats <id> --reset (returns to base, recovers all points)")
+		fmt.Println()
 
 		// Battle
 		cyan.Println("  Battle")
-		fmt.Println("    Team size: 5 faeries  |  Max turns: 100")
+		fmt.Println("    Team size: 5 faeries  |  Max turns: 200")
 		fmt.Println("    Damage = attack * (100/(100+defense)) * variance(±10%)")
 		fmt.Println("    Crit: 2x  |  Element advantage: 1.5x  |  Weakness: 0.67x")
 		fmt.Println("    Speed soft-cap at 50 (sqrt scaling above)")
@@ -109,12 +120,6 @@ var guideCmd = &cobra.Command{
 		fmt.Println("    Slots: weapon, armor, accessory (1 each per faerie)")
 		fmt.Println()
 
-		// Daily
-		cyan.Println("  Daily Rewards (7-day cycle)")
-		fmt.Println("    100 → 150 → 200 → 300 → 400 → 500 → 1000 (total: 2650g)")
-		fmt.Println("    Missing a day resets streak")
-		fmt.Println()
-
 		// Rate Limits
 		cyan.Println("  Rate Limits")
 		fmt.Println("    Global: 200 req/min  |  Reads: 120/min  |  Writes: 30/min  |  Battles: 10/min")
@@ -128,8 +133,7 @@ var guideCmd = &cobra.Command{
 
 		// Strategy
 		green.Println("  Strategy Tips")
-		fmt.Println("    1. Claim daily reward first")
-		fmt.Println("    2. Farm weakest opponent for gold + trophies")
+		fmt.Println("    1. Farm weakest opponent for gold + trophies")
 		fmt.Println("    3. Buy T1 weapons for all 5 faeries (biggest power spike)")
 		fmt.Println("    4. Allocate stat points: str + agi are strong early")
 		fmt.Println("    5. Buy armor after all weapons equipped")

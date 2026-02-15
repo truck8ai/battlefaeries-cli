@@ -9,10 +9,11 @@ import (
 )
 
 var (
-	statsHP  int
-	statsSTR int
-	statsAGI int
-	statsMAG int
+	statsHP    int
+	statsSTR   int
+	statsAGI   int
+	statsMAG   int
+	statsReset bool
 )
 
 func init() {
@@ -21,20 +22,45 @@ func init() {
 	statsCmd.Flags().IntVar(&statsSTR, "str", 0, "Strength points to allocate")
 	statsCmd.Flags().IntVar(&statsAGI, "agi", 0, "Agility points to allocate")
 	statsCmd.Flags().IntVar(&statsMAG, "mag", 0, "Magic points to allocate")
+	statsCmd.Flags().BoolVar(&statsReset, "reset", false, "Reset stats to base values and recover all allocated points")
 }
 
 var statsCmd = &cobra.Command{
 	Use:   "stats <faerie-id>",
-	Short: "Allocate stat points",
+	Short: "Allocate or reset stat points",
 	Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if statsHP+statsSTR+statsAGI+statsMAG == 0 {
-			return fmt.Errorf("specify at least one stat: --hp, --str, --agi, --mag")
-		}
-
 		c, err := newClient()
 		if err != nil {
 			return err
+		}
+
+		if statsReset {
+			body := map[string]interface{}{}
+			if reason != "" {
+				body["reasoning"] = reason
+			}
+
+			data, err := c.Post(fmt.Sprintf("/faeries/%s/reset", args[0]), body)
+			if err != nil {
+				return err
+			}
+
+			if jsonOutput {
+				fmt.Println(string(data))
+				return nil
+			}
+
+			var resp struct {
+				PointsRecovered int `json:"pointsRecovered"`
+			}
+			json.Unmarshal(data, &resp)
+			color.Green("  Stats reset to base values. %d points recovered.", resp.PointsRecovered)
+			return nil
+		}
+
+		if statsHP+statsSTR+statsAGI+statsMAG == 0 {
+			return fmt.Errorf("specify at least one stat: --hp, --str, --agi, --mag (or use --reset)")
 		}
 
 		body := map[string]interface{}{

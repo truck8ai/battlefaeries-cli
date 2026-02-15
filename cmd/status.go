@@ -48,10 +48,6 @@ var statusCmd = &cobra.Command{
 		fmt.Printf("  Faeries:   %d\n", p.FaerieCount)
 		fmt.Printf("  Win Streak: %d (best: %d)\n", p.WinStreak, p.BestWinStreak)
 
-		if p.DailyRewardAvailable {
-			color.Yellow("\n  Daily reward available! Run: bf daily")
-		}
-
 		return nil
 	},
 }

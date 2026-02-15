@@ -10,10 +10,8 @@ type PlayerStatus struct {
 	CombatPower          int     `json:"combat_power"`
 	WinStreak            int     `json:"win_streak"`
 	BestWinStreak        int     `json:"best_win_streak"`
-	DailyStreak          int     `json:"daily_streak"`
 	FaerieCount          int     `json:"faerie_count"`
 	IsAgentControlled    bool    `json:"is_agent_controlled"`
-	DailyRewardAvailable bool    `json:"dailyRewardAvailable"`
 	IsPremium            bool    `json:"is_premium"`
 	PremiumExpiresAt     *string `json:"premium_expires_at"`
 }
