@@ -50,13 +50,15 @@ var guideCmd = &cobra.Command{
 
 		// Stamina
 		var stamina struct {
-			MaxStamina    int    `json:"maxStamina"`
-			CostPerBattle int    `json:"costPerBattle"`
-			RechargeRate  string `json:"rechargeRate"`
+			MaxStamina    int `json:"maxStamina"`
+			CostPerBattle int `json:"costPerBattle"`
 		}
 		json.Unmarshal(guide["stamina"], &stamina)
 		cyan.Println("  Stamina")
-		fmt.Printf("    Max: %d  |  Cost/battle: %d  |  Recharge: %s\n\n", stamina.MaxStamina, stamina.CostPerBattle, stamina.RechargeRate)
+		fmt.Printf("    Max: %d  |  Cost/battle: %d\n", stamina.MaxStamina, stamina.CostPerBattle)
+		fmt.Println("    Regen (free):    1 per 3 min (20/hr)")
+		fmt.Println("    Regen (premium): 1 per 2 min (30/hr)")
+		fmt.Println()
 
 		// Stats
 		cyan.Println("  Stat Formulas")
@@ -98,16 +100,17 @@ var guideCmd = &cobra.Command{
 		fmt.Println()
 
 		// Gold
-		cyan.Println("  Gold (victory bonus by bracket)")
-		fmt.Println("    Bronze: 250  |  Silver: 500  |  Gold: 900  |  Diamond: 1500  |  Master: 2200")
+		cyan.Println("  Gold (victory bonus by Fae Court bracket)")
+		fmt.Println("    Wisp: 250  |  Sprite: 500  |  Sylph: 900  |  Archfae: 1500  |  Mythic: 2200")
 		fmt.Println("    Kill bonus: 50g per enemy faerie defeated")
 		fmt.Println("    Steal on win: min(loser_gold * 2%, 300g)")
 		fmt.Println()
 
 		// Trophies
-		cyan.Println("  Trophies")
-		fmt.Println("    Bronze(0-999): 8-35   |  Silver(1-2k): 10-40  |  Gold(2-3k): 12-45")
-		fmt.Println("    Diamond(3-5k): 15-50  |  Master(5k+): 18-60")
+		cyan.Println("  Trophies (percentile brackets — Fae Court)")
+		fmt.Println("    Wisp(bottom 60%): 8-35   |  Sprite(top 40%): 10-40  |  Sylph(top 15%): 12-45")
+		fmt.Println("    Archfae(top 5%): 15-50   |  Mythic(top 1%): 18-60")
+		fmt.Println("    Under 1000 players: everyone is Wisp")
 		fmt.Println("    Win streak: +5%/win (max +25%)  |  Underdog: 1.5x if outpowered")
 		fmt.Println("    Loser loses 80% of winner's gain")
 		fmt.Println()
@@ -123,6 +126,18 @@ var guideCmd = &cobra.Command{
 		// Rate Limits
 		cyan.Println("  Rate Limits")
 		fmt.Println("    Global: 200 req/min  |  Reads: 120/min  |  Writes: 30/min  |  Battles: 10/min")
+		fmt.Println()
+
+		// Premium Tiers
+		cyan.Println("  Free vs Premium ($4.99/mo)")
+		fmt.Println("    Agent API is FREE for all players.")
+		fmt.Println("    Feature            Free              Premium")
+		fmt.Println("    ─────────────────  ────────────────  ────────────────")
+		fmt.Println("    API Keys           1                 5")
+		fmt.Println("    Team Chat          5 msgs/day        50 msgs/day")
+		fmt.Println("    Commentary         1/day             10/day")
+		fmt.Println("    Stamina Regen      1 per 3 min       1 per 2 min")
+		fmt.Println("    Replay Retention   1 day             10 days")
 		fmt.Println()
 
 		// Leaderboard
