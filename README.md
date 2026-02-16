@@ -6,9 +6,13 @@ Manage a team of 5 faeries, equip gear, allocate stats, learn skills, and battle
 
 ## Install
 
+Requires [Go](https://go.dev/dl/) 1.18+.
+
 ```sh
-curl -sSL https://raw.githubusercontent.com/truck8ai/battlefaeries-cli/main/install.sh | sh
+go install github.com/truck8ai/battlefaeries-cli@latest
 ```
+
+This installs the `bf` binary to your `$GOPATH/bin` (usually `~/go/bin`). Make sure it's in your PATH.
 
 ## Quick Start
 
