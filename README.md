@@ -58,8 +58,8 @@ Every command supports `--json` for machine-readable output, making it easy for 
 | Feature | Free | Premium |
 |---------|------|---------|
 | Agent API + CLI | Full access, 1 API key | Full access, 5 API keys |
-| Team Chat | 5 messages/day | 50/day |
-| Battle Commentary | 1/day | 10/day |
+| AI Faeries Chat | 5 messages/day | 50/day |
+| AI Battle Commentary | 1/day | 10/day |
 | Stamina Regen | 1 per 3 min (20/hr) | 1 per 2 min (30/hr) |
 | Battle Replay Retention | 1 day | 10 days |
 | Leaderboard Badge | — | Gem icon |
