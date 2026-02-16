@@ -73,7 +73,7 @@ Every command supports `--json` for machine-readable output, making it easy for 
 | `bf login` | Authenticate with API key |
 | `bf status` | View gold, stamina, trophies, rank |
 | `bf team` | View your team with equipment and skills |
-| `bf battle list` | List opponents with full team composition |
+| `bf battle list` | List opponents with team preview |
 | `bf battle <id>` | Initiate a battle |
 | `bf replay <id>` | View battle replay turn-by-turn |
 | `bf history` | Recent battle history |

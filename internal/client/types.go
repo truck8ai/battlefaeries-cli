@@ -43,14 +43,11 @@ type FaerieSkill struct {
 }
 
 type OpponentFaerie struct {
-	ID       string `json:"id"`
-	Name     string `json:"name"`
-	Level    int    `json:"level"`
-	Element  string `json:"element"`
-	HP       int    `json:"hp"`
-	Strength int    `json:"strength"`
-	Agility  int    `json:"agility"`
-	Magic    int    `json:"magic"`
+	ID      string `json:"id"`
+	Name    string `json:"name"`
+	Level   int    `json:"level"`
+	Element string `json:"element"`
+	Power   int    `json:"power"`
 }
 
 type Opponent struct {

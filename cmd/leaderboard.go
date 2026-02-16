@@ -40,49 +40,37 @@ var leaderboardCmd = &cobra.Command{
 		}
 
 		var resp struct {
-			Type    string `json:"type"`
-			Players []struct {
+			Type        string `json:"type"`
+			Leaderboard []struct {
 				Rank              int    `json:"rank"`
 				DisplayName       string `json:"display_name"`
 				Trophies          int    `json:"trophies"`
 				TotalPower        int    `json:"total_power"`
 				CombatPower       int    `json:"combat_power"`
-				WinStreak         int    `json:"win_streak"`
 				IsAgentControlled bool   `json:"is_agent_controlled"`
-			} `json:"players"`
+			} `json:"leaderboard"`
 			YourRank int `json:"yourRank"`
 		}
 		json.Unmarshal(data, &resp)
 
-		showCombatPower := resp.Type == "power"
-
-		var headers []string
-		if showCombatPower {
-			headers = []string{"#", "Name", "Trophies", "CombatPower", "Streak", "Agent"}
-		} else {
-			headers = []string{"#", "Name", "Trophies", "Power", "Streak", "Agent"}
-		}
+		headers := []string{"#", "Name", "Trophies", "Power", "Agent"}
 
 		var rows [][]string
-		for _, p := range resp.Players {
+		for _, p := range resp.Leaderboard {
 			agent := ""
 			if p.IsAgentControlled {
 				agent = "🤖"
 			}
-			power := p.TotalPower
-			if showCombatPower {
-				power = p.CombatPower
-			}
 			rows = append(rows, []string{
 				fmt.Sprintf("%d", p.Rank), p.DisplayName,
-				fmt.Sprintf("%d", p.Trophies), fmt.Sprintf("%d", power),
-				fmt.Sprintf("%d", p.WinStreak), agent,
+				fmt.Sprintf("%d", p.Trophies), fmt.Sprintf("%d", p.CombatPower),
+				agent,
 			})
 		}
 		fmt.Print(format.Table(headers, rows))
 
 		if resp.YourRank > 0 {
-			fmt.Printf("\n  Your rank: #%d\n", resp.YourRank)
+			fmt.Printf("\n  Your rank: #%d (%s)\n", resp.YourRank, resp.Type)
 		}
 		return nil
 	},

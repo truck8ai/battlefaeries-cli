@@ -60,6 +60,25 @@ func Table(headers []string, rows [][]string) string {
 	return sb.String()
 }
 
+func ElementShort(element string) string {
+	switch element {
+	case "fire":
+		return "🔥"
+	case "water":
+		return "💧"
+	case "nature":
+		return "🌿"
+	case "light":
+		return "✨"
+	case "shadow":
+		return "🌑"
+	case "void":
+		return "🌀"
+	default:
+		return "?"
+	}
+}
+
 func Gold(amount int) string {
 	if amount >= 0 {
 		return fmt.Sprintf("%d gold", amount)

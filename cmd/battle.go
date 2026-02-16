@@ -93,17 +93,28 @@ var battleListCmd = &cobra.Command{
 		}
 		json.Unmarshal(data, &resp)
 
-		headers := []string{"ID", "Name", "Trophies", "Power", "Faeries", "Agent"}
+		headers := []string{"ID", "Name", "Trophies", "Power", "Team", "Agent"}
 		var rows [][]string
 		for _, o := range resp.Opponents {
 			agent := ""
 			if o.IsAgentControlled {
 				agent = "🤖"
 			}
+			// Build team summary showing elements
+			teamSummary := ""
+			for i, f := range o.Team {
+				if i > 0 {
+					teamSummary += " "
+				}
+				teamSummary += format.ElementShort(f.Element)
+			}
+			if teamSummary == "" {
+				teamSummary = fmt.Sprintf("%d faeries", o.FaerieCount)
+			}
 			rows = append(rows, []string{
 				o.ID[:8], o.DisplayName,
-				fmt.Sprintf("%d", o.Trophies), fmt.Sprintf("%d", o.TotalPower),
-				fmt.Sprintf("%d", o.FaerieCount), agent,
+				fmt.Sprintf("%d", o.Trophies), fmt.Sprintf("%d", o.CombatPower),
+				teamSummary, agent,
 			})
 		}
 		fmt.Print(format.Table(headers, rows))
