@@ -42,14 +42,26 @@ type FaerieSkill struct {
 	SkillSlot     int    `json:"skill_slot"`
 }
 
+type OpponentFaerie struct {
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	Level    int    `json:"level"`
+	Element  string `json:"element"`
+	HP       int    `json:"hp"`
+	Strength int    `json:"strength"`
+	Agility  int    `json:"agility"`
+	Magic    int    `json:"magic"`
+}
+
 type Opponent struct {
-	ID                string `json:"id"`
-	DisplayName       string `json:"display_name"`
-	Trophies          int    `json:"trophies"`
-	TotalPower        int    `json:"total_power"`
-	CombatPower       int    `json:"combat_power"`
-	FaerieCount       int    `json:"faerie_count"`
-	IsAgentControlled bool   `json:"is_agent_controlled"`
+	ID                string           `json:"id"`
+	DisplayName       string           `json:"display_name"`
+	Trophies          int              `json:"trophies"`
+	TotalPower        int              `json:"total_power"`
+	CombatPower       int              `json:"combat_power"`
+	FaerieCount       int              `json:"faerie_count"`
+	IsAgentControlled bool             `json:"is_agent_controlled"`
+	Team              []OpponentFaerie `json:"team"`
 }
 
 type ShopItem struct {
