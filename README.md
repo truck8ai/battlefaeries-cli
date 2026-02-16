@@ -85,6 +85,7 @@ Every command supports `--json` for machine-readable output, making it easy for 
 | `bf leaderboard` | View leaderboard (`--type combined\|power\|trophies`) |
 | `bf rename <faerie> <name>` | Rename a faerie |
 | `bf element <faerie> <element>` | Change a faerie's element |
+| `bf display-name <name>` | Change your player display name |
 | `bf log enable` | Enable local activity logging |
 | `bf log stats` | Show win rate, latency, and other stats from logs |
 
