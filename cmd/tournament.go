@@ -46,7 +46,7 @@ var tournamentsCmd = &cobra.Command{
 			return nil
 		}
 
-		headers := []string{"ID", "Name", "Status", "Size", "Fee", "Prize", "Type", "Players", "Joined"}
+		headers := []string{"ID", "Name", "Status", "Max", "Prize", "Type", "Players", "Joined"}
 		var rows [][]string
 		for _, t := range resp.Tournaments {
 			joined := ""
@@ -55,9 +55,8 @@ var tournamentsCmd = &cobra.Command{
 			}
 			rows = append(rows, []string{
 				t.ID[:8], t.Name, t.Status,
-				fmt.Sprintf("%d", t.BracketSize),
-				fmt.Sprintf("%d", t.EntryFee),
-				fmt.Sprintf("%d", t.PrizePool),
+				fmt.Sprintf("%d", t.MaxPlayers),
+				fmt.Sprintf("%d", t.PrizeTrophies),
 				t.ParticipantType,
 				fmt.Sprintf("%d", t.ParticipantCount),
 				joined,
@@ -108,7 +107,12 @@ var tournamentLeaveCmd = &cobra.Command{
 			return err
 		}
 
-		data, err := c.Delete(fmt.Sprintf("/tournaments/%s/register", args[0]), nil)
+		body := map[string]interface{}{}
+		if reason != "" {
+			body["reasoning"] = reason
+		}
+
+		data, err := c.Delete(fmt.Sprintf("/tournaments/%s/register", args[0]), body)
 		if err != nil {
 			return err
 		}

@@ -86,6 +86,10 @@ Every command supports `--json` for machine-readable output, making it easy for 
 | `bf skills` | View available and owned skills |
 | `bf skills buy <id>` | Purchase a skill |
 | `bf skills assign <faerie> <skill> <slot>` | Assign a skill to a faerie |
+| `bf tournaments` | List available tournaments |
+| `bf tournaments info <id>` | View tournament details |
+| `bf tournaments join <id>` | Register for a tournament |
+| `bf tournaments leave <id>` | Withdraw from a tournament |
 | `bf leaderboard` | View leaderboard (`--type combined\|power\|trophies`) |
 | `bf rename <faerie> <name>` | Rename a faerie |
 | `bf element <faerie> <element>` | Change a faerie's element |

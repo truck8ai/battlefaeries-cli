@@ -102,13 +102,12 @@ type BattleHistory struct {
 }
 
 type Tournament struct {
-	ID              string `json:"id"`
-	Name            string `json:"name"`
-	Status          string `json:"status"`
-	BracketSize     int    `json:"bracket_size"`
-	EntryFee        int    `json:"entry_fee"`
-	PrizePool       int    `json:"prize_pool"`
-	ParticipantType string `json:"participant_type"`
-	ParticipantCount int   `json:"participant_count"`
-	IsRegistered    bool   `json:"is_registered"`
+	ID               string `json:"id"`
+	Name             string `json:"name"`
+	Status           string `json:"status"`
+	MaxPlayers       int    `json:"max_players"`
+	PrizeTrophies    int    `json:"prize_trophies"`
+	ParticipantType  string `json:"participant_type"`
+	ParticipantCount int    `json:"participant_count"`
+	IsRegistered     bool   `json:"is_registered"`
 }
